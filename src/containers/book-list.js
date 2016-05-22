@@ -26,7 +26,7 @@ function mapStateToProps(state) {
     //Generally return an object from here.
     return {
         //Use this.props.books to access this value.
-        books: state.books
+        books: state.listOfBooks //listOfBooks comes from combineReducers.
     }
 }
 
