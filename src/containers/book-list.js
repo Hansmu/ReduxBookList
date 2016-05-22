@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; //To connect redux and react.
+import { selectBook } from '../actions/index';
+import { bindActionCreators } from 'redux'; //To make sure an action flows through all of the reducers in our application.
 
 //A container because it cares about when the list of book changes.
 //Only the parent is a component.
@@ -29,5 +31,14 @@ function mapStateToProps(state) {
         books: state.listOfBooks //listOfBooks comes from combineReducers.
     }
 }
-
-export default connect(mapStateToProps) (BookList);//Produces a container.
+//Anything returned from this function will end up as props on the BookList container.
+function mapDispatchToProps(dispatch) {
+    //Whenever selectBook is called, the result should be passed to all
+    //of our reducers
+    //When we call this.props.selectedBook, then our action creator selectBook will be called.
+    //The dispatch function will then send the action to the reducers.
+    return bindActionCreators({ selectedBook: selectBook}, dispatch);
+}
+//Promote BookList from a component to a container - it needs to know about this new dispatch method, selectBook
+//Make it available as prop.
+export default connect(mapStateToProps, mapDispatchToProps) (BookList);//Produces a container.
