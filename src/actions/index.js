@@ -1,4 +1,9 @@
+import { BOOK_SELECTED } from './action_types';
 
 export function selectBook(book) {
-    console.log('A book has been selected ' + book.title);
+    //ActionCreator that returns an action. Action must have a type.
+    return {
+        type: BOOK_SELECTED,
+        payload: book
+    };
 }
